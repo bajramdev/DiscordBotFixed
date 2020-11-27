@@ -1,0 +1,12 @@
+{
+  "company" : {
+  "apple": "Apple",
+  "facebook": "Facebook",
+  "google": "Google",
+  "microsoft": "Microsoft",
+  "netflix": "Netflix"
+    },
+  "tradera" : {
+    "pikachu" : "pikachu"
+  }
+}
