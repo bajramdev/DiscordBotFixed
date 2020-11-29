@@ -31,18 +31,26 @@ module.exports = {
             }
             let editedMail = randomStr.concat(removed.join(''));
 
-            let newArr = []
+            var newArr = []
 
             newArr.push(editedMail);
 
-            fs.appendFileSync('emailList.txt', `${newArr.join('')}\n`);
-
-            const path = "emailList.txt";
-            var content = fs.readFileSync(path, 'utf-8');
-
+            var stream =  fs.createWriteStream ("MailLista.txt" , {flags: 'a'});
+            [...newArr].forEach(function (item) {
+                stream.write(item + "\n");
+            })
         }
-             await message.author.send({
-                 files: ['emailList.txt']
+            fs.readFile('C:\\Users\\Bajra\\WebstormProjects\\untitled28\\discordbot\\MailLista.txt', 'utf8',  (err, data) => {
+            if (data) {
+                fs.truncate('C:\\Users\\Bajra\\WebstormProjects\\untitled28\\discordbot\\MailLista.txt', 0, function(){console.log('done')})
+            } else if (err) {
+                console.log(err)
+            }
+       });
+
+       await message.author.send({
+                 files: ['MailLista.txt']
              });
+            stream.end();
     }
 }
