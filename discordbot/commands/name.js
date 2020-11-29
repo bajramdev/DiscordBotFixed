@@ -1,16 +1,33 @@
+const fs = require('fs');
+
 module.exports = {
 
     name: 'name',
     description: '',
-    execute(message, name, num){
+    async execute(message, name, num){
 
-        let randomInt =  Math.floor(Math.random() * Math.floor(30)) + 1;
+        for (let i = 0; i < 10; i++) {
 
-        let alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Å','Ä','Ö'];
-        let newarr =  alphabet.join("");
-        let ar = newarr.substring(randomInt, randomInt + num)
-        let fullAr =  name + `${ar} `;
+            let randomInt = Math.floor(Math.random() * Math.floor(30)) + 1;
 
-        message.channel.send(`${fullAr} ${message.author}!`);
+            let alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Å', 'Ä', 'Ö'];
+            let newarr = alphabet.join("");
+            let ar = newarr.substring(randomInt, randomInt + num)
+            let fullAr = name + `${ar} `;
+
+            let newArr = []
+
+            newArr.push(fullAr);
+
+            fs.appendFileSync('name.txt', `${newArr.join('')}\n`);
+
+            const path = "name.txt";
+            var content = fs.readFileSync(path, 'utf-8');
+        }
+
+        await message.author.send({
+            files: ['name.txt']
+        });
+
     }
 }
